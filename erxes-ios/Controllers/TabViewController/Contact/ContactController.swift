@@ -89,21 +89,23 @@ class ContactController: UIViewController {
 
 
     var customerAddButton: UIButton = {
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+        let button = UIButton()
         let image = UIImage.erxes(with: .adduser, textColor: .white)
         button.setBackgroundImage(image, for: .normal)
         button.tintColor = UIColor.white
         button.addTarget(self, action: #selector(addAction(sender:)), for: .touchUpInside)
         button.contentMode = .scaleAspectFit
+        button.sizeToFit()
         return button
     }()
 
     var companyAddButton: UIButton = {
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+        let button = UIButton()
         let image = #imageLiteral(resourceName: "ic_addCompany")
         button.setBackgroundImage(image, for: .normal)
         button.tintColor = UIColor.white
         button.addTarget(self, action: #selector(addAction(sender:)), for: .touchUpInside)
+        button.sizeToFit()
         return button
     }()
 
@@ -112,8 +114,7 @@ class ContactController: UIViewController {
         let control = UISegmentedControl(items: items)
         control.frame = CGRect(x: 0, y: 0, width: 200, height: 23)
         control.layer.cornerRadius = 5.0
-//        control.tintColor = UIColor.init(hexString: "4e25a5")
-//        control.backgroundColor = UIColor.init(hexString: "421f8b")
+
         let attributes = [
             NSAttributedStringKey.foregroundColor: UIColor.white,
             NSAttributedStringKey.font: Font.regular(15)
@@ -154,15 +155,7 @@ class ContactController: UIViewController {
             if !customer.primaryPhone.isNullOrEmpty {
                 
                 actionSheet.addAction(UIAlertAction(title: "Make a phone call", style: .default, handler: { (action) in
-                 
-//                    if let url = URL(string: "tel://\(customer.primaryPhone)"), UIApplication.shared.canOpenURL(url) {
-//                        if #available(iOS 10, *) {
-//                            UIApplication.shared.open(url)
-//                        } else {
-//                            UIApplication.shared.openURL(url)
-//                        }
-//                    }
-                    print(customer.primaryPhone)
+
                     self.dialNumber(number: customer.primaryPhone!)
                 }))
             }
@@ -232,11 +225,12 @@ class ContactController: UIViewController {
 
             rightImage = rightImage.withRenderingMode(.alwaysTemplate)
             let barButtomItem = UIBarButtonItem()
-            let button = UIButton(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+            let button = UIButton()
             button.contentMode = .scaleAspectFit
             button.setBackgroundImage(rightImage, for: .normal)
             button.tintColor = UIColor.white
             button.addTarget(self, action: #selector(navigateFilter), for: .touchUpInside)
+            button.sizeToFit()
             barButtomItem.customView = button
             return barButtomItem
         }()
